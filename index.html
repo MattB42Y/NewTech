@@ -5,80 +5,902 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>FutureGadgets — Gadgets You've Never Seen Before</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Unbounded:wght@300;400;700;900&display=swap" rel="stylesheet" />
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'DM Sans', sans-serif; background: #f5f4f0; color: #111; min-height: 100vh; }
-  .hero { background: #0a0a0a; padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 0%, #1a1a2e 0%, #0a0a0a 70%); }
-  .hero-badge { display: inline-block; background: rgba(255,255,255,0.08); border: 0.5px solid rgba(255,255,255,0.2); border-radius: 100px; padding: 4px 14px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 1rem; position: relative; }
-  .hero h1 { font-family: 'Syne', sans-serif; font-size: 3.2rem; font-weight: 800; color: #fff; line-height: 1.1; margin-bottom: 0.75rem; position: relative; }
-  .hero h1 span { color: #6ee7b7; }
-  .hero p { font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 480px; margin: 0 auto 1.5rem; line-height: 1.6; position: relative; }
-  .hero-stats { display: flex; justify-content: center; gap: 2.5rem; position: relative; }
-  .hero-stat .num { font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 700; color: #fff; }
-  .hero-stat .lbl { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; }
-  .section { padding: 2.5rem 2rem; max-width: 1100px; margin: 0 auto; }
-  .section-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1.5rem; }
-  .section-header h2 { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: #111; }
-  .section-header .count { font-size: 12px; color: #888; border: 0.5px solid #ddd; border-radius: 100px; padding: 2px 10px; }
-  .featured { background: #0a0a0a; border-radius: 14px; padding: 2rem; margin-bottom: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
-  .featured-img { border-radius: 10px; overflow: hidden; background: #1a1a1a; display: flex; align-items: center; justify-content: center; }
-  .featured-img img { width: 100%; height: auto; display: block; object-fit: contain; }
-  .featured-badge { display: inline-block; background: rgba(110,231,183,0.15); border: 0.5px solid rgba(110,231,183,0.3); color: #6ee7b7; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 10px; border-radius: 100px; margin-bottom: 0.8rem; }
-  .featured h3 { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 0.6rem; line-height: 1.25; }
-  .featured p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; margin-bottom: 1.2rem; }
-  .btn-featured { background: #6ee7b7; color: #0a0a0a; font-size: 13px; font-weight: 700; padding: 10px 22px; border-radius: 100px; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block; }
-  .btn-featured:hover { background: #4dd4a0; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.1rem; }
-  .card { background: #fff; border: 0.5px solid #e5e5e5; border-radius: 14px; overflow: hidden; transition: border-color 0.2s, transform 0.2s; display: flex; flex-direction: column; }
-  .card:hover { border-color: #bbb; transform: translateY(-2px); }
-  .card-img { width: 100%; background: #f0f0ee; position: relative; display: flex; align-items: center; justify-content: center; }
-  .card-img img { width: 100%; height: auto; display: block; object-fit: contain; }
-  .img-badge { position: absolute; top: 10px; left: 10px; background: #0a0a0a; color: #6ee7b7; font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 9px; border-radius: 100px; }
-  .card-body { padding: 1.1rem 1.2rem 1.2rem; flex: 1; display: flex; flex-direction: column; }
-  .card-category { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 4px; }
-  .card-title { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: #111; margin-bottom: 0.4rem; line-height: 1.3; }
-  .card-desc { font-size: 13px; color: #666; line-height: 1.55; margin-bottom: 1rem; flex: 1; }
-  .card-price { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 0.75rem; }
-  .card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 0.8rem; border-top: 0.5px solid #eee; margin-top: auto; }
-  .wow-tag { font-size: 11px; color: #999; display: flex; align-items: center; gap: 5px; }
-  .wow-dot { width: 6px; height: 6px; border-radius: 50%; background: #6ee7b7; flex-shrink: 0; }
-  .btn-see { background: #0a0a0a; color: #fff; font-size: 12px; font-weight: 500; padding: 7px 16px; border-radius: 100px; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; text-decoration: none; display: inline-block; transition: background 0.15s; }
-  .btn-see:hover { background: #333; }
-  .divider { height: 0.5px; background: #e5e5e5; }
-  footer { text-align: center; padding: 1.5rem 1rem 2rem; color: #aaa; font-size: 12px; border-top: 0.5px solid #e5e5e5; margin-top: 1rem; }
-  @media (max-width: 640px) { .hero h1 { font-size: 2.1rem; } .featured { grid-template-columns: 1fr; } .grid { grid-template-columns: 1fr; } .section { padding: 1.5rem 1rem; } }
+  :root {
+    --bg: #050507;
+    --surface: #0d0d12;
+    --border: rgba(255,255,255,0.07);
+    --accent: #00ff88;
+    --accent2: #ff3cac;
+    --accent3: #7928ca;
+    --text: #e8e8f0;
+    --muted: rgba(232,232,240,0.4);
+    --card-bg: #0f0f16;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Space Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(0,255,136,0.4);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: all 0.15s ease-out;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.35;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 6rem 5vw 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,255,136,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,136,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 20s linear infinite;
+  }
+
+  @keyframes gridShift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 800px; height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 70%);
+    top: -200px; right: -200px;
+    pointer-events: none;
+    animation: pulseGlow 8s ease-in-out infinite alternate;
+  }
+  .hero-glow2 {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(121,40,202,0.1) 0%, transparent 70%);
+    bottom: -100px; left: 10%;
+    pointer-events: none;
+    animation: pulseGlow 10s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes pulseGlow {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.15); opacity: 1; }
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  .hero-eyebrow-line {
+    width: 40px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-eyebrow-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .hero h1 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 .line {
+    display: block;
+    overflow: hidden;
+  }
+
+  .hero h1 .word {
+    display: inline-block;
+    animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .hero h1 .line:nth-child(1) .word { animation-delay: 0.1s; }
+  .hero h1 .line:nth-child(2) .word { animation-delay: 0.2s; }
+  .hero h1 .line:nth-child(3) .word { animation-delay: 0.3s; }
+
+  @keyframes slideUp {
+    from { transform: translateY(110%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .hero h1 .outline {
+    -webkit-text-stroke: 1.5px var(--accent);
+    color: transparent;
+  }
+  .hero h1 .fill { color: var(--text); }
+  .hero h1 .accent { color: var(--accent); }
+
+  .hero-sub {
+    font-size: 13px;
+    color: var(--muted);
+    max-width: 420px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    position: relative;
+    animation: fadeIn 1s 0.5s both;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    animation: fadeIn 1s 0.6s both;
+    position: relative;
+  }
+  .hero-stat {
+    padding: 1rem 1.8rem;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat .num {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat .lbl {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 1s 1s both;
+  }
+  .scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); transform-origin: top; }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* SECTION */
+  .section {
+    padding: 4rem 5vw;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 2rem;
+  }
+  .section-label-line {
+    width: 30px; height: 1px;
+    background: var(--accent);
+  }
+  .section-label h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .section-label .count {
+    margin-left: auto;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+  }
+
+  /* FEATURED */
+  .featured {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .featured:hover {
+    border-color: rgba(0,255,136,0.25);
+  }
+  .featured::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,255,136,0.03) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .featured-img-wrap {
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .featured-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 50%, var(--surface) 100%);
+  }
+  .featured-img-wrap img {
+    width: 75%;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 0 40px rgba(0,255,136,0.15));
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s;
+  }
+  .featured:hover .featured-img-wrap img {
+    transform: scale(1.04);
+    filter: drop-shadow(0 0 60px rgba(0,255,136,0.25));
+  }
+
+  .featured-content {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--card-bg);
+  }
+
+  .featured-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 1.2rem;
+  }
+  .featured-tag-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: blink 2s ease-in-out infinite;
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .featured-tag-text {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .featured-content h3 {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+  }
+
+  .featured-content p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.9;
+    margin-bottom: 2rem;
+  }
+
+  .btn-featured {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #050507;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 12px 24px;
+    position: relative;
+    transition: all 0.2s;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+  .btn-featured:hover {
+    background: var(--text);
+    gap: 18px;
+  }
+  .btn-featured .arrow { transition: transform 0.2s; }
+  .btn-featured:hover .arrow { transform: translateX(4px); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 3rem 0;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .card {
+    background: var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,255,136,0.04) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .card:hover {
+    background: #111118;
+  }
+  .card:hover::after { opacity: 1; }
+
+  .card-img {
+    position: relative;
+    background: var(--surface);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    overflow: hidden;
+  }
+  .card-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 40%, var(--surface) 100%);
+  }
+  .card-img img {
+    width: 70%;
+    max-height: 150px;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s;
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.5));
+  }
+  .card:hover .card-img img {
+    transform: scale(1.06) translateY(-4px);
+    filter: drop-shadow(0 8px 30px rgba(0,255,136,0.15));
+  }
+
+  .img-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid rgba(0,255,136,0.3);
+    padding: 3px 8px;
+    background: rgba(0,255,136,0.06);
+  }
+
+  .card-body {
+    padding: 1.2rem 1.4rem 1.4rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .card-category {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  .card-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .card-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+    flex: 1;
+  }
+
+  .card-price {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    margin-top: auto;
+  }
+
+  .wow-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .wow-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+    animation: blink 3s ease-in-out infinite;
+  }
+
+  .btn-see {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-see::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-101%);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 0;
+  }
+  .btn-see:hover {
+    color: #050507;
+    border-color: var(--accent);
+  }
+  .btn-see:hover::before {
+    transform: translateX(0);
+  }
+  .btn-see span { position: relative; z-index: 1; }
+
+  /* Marquee ticker */
+  .ticker {
+    background: var(--accent);
+    color: #050507;
+    padding: 0.6rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: marquee 25s linear infinite;
+  }
+  .ticker-inner span {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 0 2rem;
+  }
+  .ticker-inner .sep { opacity: 0.4; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4rem;
+  }
+  .footer-logo {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .footer-logo span { color: var(--accent); }
+  footer p {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-align: right;
+  }
+
+  /* Number counter on cards */
+  .card-num {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.08);
+    font-weight: 900;
+    z-index: 2;
+    letter-spacing: -0.05em;
+  }
+
+  /* Scanline on hover */
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    top: 0;
+    transform: scaleX(0);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 3;
+  }
+  .card:hover::before { transform: scaleX(1); }
+
+  /* ── FILTER BAR ── */
+  .filter-wrap {
+    padding: 0 5vw;
+    max-width: 1400px;
+    margin: 0 auto 0;
+  }
+  .filter-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+  .filter-header-line { width: 24px; height: 1px; background: var(--accent); }
+  .filter-header span {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .filter-result {
+    margin-left: auto;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    font-family: 'Space Mono', monospace;
+  }
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 2rem;
+  }
+  .filter-btn {
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 7px 14px;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s, border-color 0.2s;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .filter-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateY(101%);
+    transition: transform 0.22s cubic-bezier(0.16,1,0.3,1);
+    z-index: 0;
+  }
+  .filter-btn span { position: relative; z-index: 1; }
+  .filter-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .filter-btn.active { color: #050507; border-color: var(--accent); }
+  .filter-btn.active::before { transform: translateY(0); }
+  .filter-btn .pill {
+    position: relative; z-index: 1;
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 7px;
+    opacity: 0.6;
+  }
+  .filter-btn.active .pill { opacity: 0.7; }
+  .card.hidden { display: none; }
+  .empty-state {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5rem 2rem;
+    color: var(--muted);
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .empty-state.visible { display: flex; }
+  .empty-icon { font-size: 2rem; margin-bottom: 1rem; opacity: 0.3; }
+  .empty-state p { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+
+  @media (max-width: 768px) {
+    .hero { padding: 4rem 1.5rem 3rem; }
+    .hero h1 { font-size: clamp(2.2rem, 12vw, 4rem); }
+    .featured { grid-template-columns: 1fr; }
+    .featured-img-wrap { border-right: none; border-bottom: 1px solid var(--border); min-height: 240px; }
+    .grid { grid-template-columns: 1fr; }
+    .section { padding: 2.5rem 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    footer p { text-align: center; }
+    .hero-stats { gap: 0; }
+  }
 </style>
 </head>
 <body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- HERO -->
 <div class="hero">
-  <div class="hero-badge">2025 Tech Discoveries</div>
-  <h1>Gadgets You've <span>Never</span><br>Seen Before</h1>
-  <p>We find the world's most unique high-tech gadgets before they go mainstream.</p>
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+
+  <div class="hero-eyebrow">
+    <div class="hero-eyebrow-line"></div>
+    <div class="hero-eyebrow-text">2025 Tech Discoveries</div>
+  </div>
+
+  <h1>
+    <span class="line"><span class="word fill">Gadgets</span></span>
+    <span class="line"><span class="word outline">You've Never</span></span>
+    <span class="line"><span class="word accent">Seen Before.</span></span>
+  </h1>
+
+  <p class="hero-sub">We surface the world's most mind-bending tech before it goes mainstream. The future, curated weekly.</p>
+
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num">10</div><div class="lbl">Gadgets</div></div>
-    <div class="hero-stat"><div class="num">100%</div><div class="lbl">Unique</div></div>
-    <div class="hero-stat"><div class="num">2025</div><div class="lbl">Picks</div></div>
+    <div class="hero-stat">
+      <span class="num">20</span>
+      <span class="lbl">Gadgets</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">100%</span>
+      <span class="lbl">Unique</span>
+    </div>
+    <div class="hero-stat">
+      <span class="num">2025</span>
+      <span class="lbl">Picks</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
   </div>
 </div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>UV Object Printing</span><span class="sep">✦</span>
+    <span>Sodium-Ion Power</span><span class="sep">✦</span>
+    <span>AR Ski Goggles</span><span class="sep">✦</span>
+    <span>Smart Glasses</span><span class="sep">✦</span>
+    <span>Payment Ring</span><span class="sep">✦</span>
+    <span>E-Ink Art Frames</span><span class="sep">✦</span>
+    <span>Modular PCs</span><span class="sep">✦</span>
+    <span>TMJ Wearables</span><span class="sep">✦</span>
+    <span>Hi-Fi Audio</span><span class="sep">✦</span>
+    <span>Handheld Fan</span><span class="sep">✦</span>
+    <span>Vacuum Tube Headphones</span><span class="sep">✦</span>
+    <span>Wallpaper TV</span><span class="sep">✦</span>
+    <span>Ultrasonic Knife</span><span class="sep">✦</span>
+    <span>Holographic Frame</span><span class="sep">✦</span>
+    <span>Robot Arm Vacuum</span><span class="sep">✦</span>
+    <span>AR Glasses</span><span class="sep">✦</span>
+    <span>Wrist Gauntlet</span><span class="sep">✦</span>
+    <span>UV Object Printing</span><span class="sep">✦</span>
+    <span>Sodium-Ion Power</span><span class="sep">✦</span>
+    <span>AR Ski Goggles</span><span class="sep">✦</span>
+    <span>Smart Glasses</span><span class="sep">✦</span>
+    <span>Payment Ring</span><span class="sep">✦</span>
+    <span>E-Ink Art Frames</span><span class="sep">✦</span>
+    <span>Modular PCs</span><span class="sep">✦</span>
+    <span>TMJ Wearables</span><span class="sep">✦</span>
+    <span>Hi-Fi Audio</span><span class="sep">✦</span>
+    <span>Handheld Fan</span><span class="sep">✦</span>
+    <span>Vacuum Tube Headphones</span><span class="sep">✦</span>
+    <span>Wallpaper TV</span><span class="sep">✦</span>
+    <span>Ultrasonic Knife</span><span class="sep">✦</span>
+    <span>Holographic Frame</span><span class="sep">✦</span>
+    <span>Robot Arm Vacuum</span><span class="sep">✦</span>
+    <span>AR Glasses</span><span class="sep">✦</span>
+    <span>Wrist Gauntlet</span><span class="sep">✦</span>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
 <div class="section">
-  <div class="section-header"><h2>Editor's pick</h2><span class="count">Featured</span></div>
+
+  <!-- FEATURED -->
+  <div class="section-label">
+    <div class="section-label-line"></div>
+    <h2>Editor's Pick</h2>
+    <span class="count">Featured</span>
+  </div>
+
   <div class="featured">
-    <div class="featured-img">
+    <div class="featured-img-wrap">
       <img src="https://th.bing.com/th/id/OIP.n4F-uwKuYCWAthuNr1Q1rwHaEK?w=320&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Xreal One Pro Smart Glasses" />
     </div>
-    <div>
-      <div class="featured-badge">Top Pick</div>
-      <h3>Xreal One Pro Smart Glasses</h3>
-      <p>A prism that reflects an OLED display directly into your vision — wider field of view, less bulk than anything before it. The future of wearable screens is here.</p>
-      <a href="https://www.amazon.com/XREAL-Glasses-X-Prism-Display-Android/dp/B0FDPNC49S/ref=asc_df_B0FDPNC49S?tag=bingshoppinga-20&linkCode=df0&hvadid=80745595096125&hvnetw=o&hvqmt=e&hvbmt=be&hvdev=c&hvlocint=&hvlocphy=79094&hvtargid=pla-4584345080103331&msclkid=61cce3e0613010c3da128a0c5facc12e&th=1"  class="btn-featured">See Deal ↗</a>
+    <div class="featured-content">
+      <div class="featured-tag">
+        <div class="featured-tag-dot"></div>
+        <span class="featured-tag-text">Top Pick — Limited Drop</span>
+      </div>
+      <h3>Xreal One Pro<br>Smart Glasses</h3>
+      <p>A prism that reflects an OLED display directly into your vision — wider field of view, less bulk than anything before it. The future of wearable screens is not coming. It's here.</p>
+      <a href="https://www.amazon.com/XREAL-Glasses-X-Prism-Display-Android/dp/B0FDPNC49S/" class="btn-featured">
+        See Deal <span class="arrow">→</span>
+      </a>
     </div>
   </div>
-  <div class="divider" style="margin-bottom:2rem;"></div>
-  <div class="section-header"><h2>All 10 gadgets</h2><span class="count">2025</span></div>
-  <div class="grid">
-    <div class="card">
+
+  <div class="divider"></div>
+
+  <!-- ALL GADGETS -->
+  <div class="filter-wrap">
+    <div class="filter-header">
+      <div class="filter-header-line"></div>
+      <span>Filter by Category</span>
+      <span class="filter-result" id="resultCount">20 gadgets</span>
+    </div>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-cat="all"><span>All<span class="pill">20</span></span></button>
+      <button class="filter-btn" data-cat="ar"><span>AR &amp; Smart Glasses<span class="pill">4</span></span></button>
+      <button class="filter-btn" data-cat="audio"><span>Audio<span class="pill">3</span></span></button>
+      <button class="filter-btn" data-cat="display"><span>Display &amp; TV<span class="pill">4</span></span></button>
+      <button class="filter-btn" data-cat="wearable"><span>Wearables<span class="pill">2</span></span></button>
+      <button class="filter-btn" data-cat="home"><span>Home Tech<span class="pill">4</span></span></button>
+      <button class="filter-btn" data-cat="outdoor"><span>Outdoor &amp; Power<span class="pill">1</span></span></button>
+      <button class="filter-btn" data-cat="computing"><span>Computing<span class="pill">2</span></span></button>
+      <button class="filter-btn" data-cat="health"><span>Health<span class="pill">1</span></span></button>
+    </div>
+  </div>
+
+  <div class="section-label">
+    <div class="section-label-line"></div>
+    <h2 id="sectionTitle">All 20 Gadgets</h2>
+    <span class="count">2025–2026 Edition</span>
+  </div>
+
+  <div class="grid" id="gadgetGrid">
+
+    <div class="card" data-cat="home">
+      <div class="card-num">01</div>
       <div class="card-img">
         <img src="https://th.bing.com/th/id/OIP.v9mbZQ91wo4piiInKQKtdgHaEK?w=295&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="eufyMake UV Printer E1" />
         <div class="img-badge">Printing</div>
@@ -87,11 +909,16 @@
         <div class="card-category">Home Tech</div>
         <div class="card-title">eufyMake UV Printer E1</div>
         <div class="card-desc">Prints directly onto objects — phone cases, wood, mugs. The world's first personal UV object printer for home use.</div>
-        <div class="card-price">$2,299.00</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> World's first</div><a href="https://www.eufymake.com/products/eufymake-e1" target="_blank" rel="noopener" class="btn-see">View ↗</a></div>
+        <div class="card-price">$2,299</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> World's first</div>
+          <a href="https://www.eufymake.com/products/eufymake-e1" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="outdoor">
+      <div class="card-num">02</div>
       <div class="card-img">
         <img src="https://www.bing.com/th?id=OPHS.JaNDRd5nCFGN9w474C474&o=5&pid=21.1&w=152&h=212&qlt=100&dpr=1.3&bw=6&bc=FFFFFF" alt="BLUETTI Pioneer Na" />
         <div class="img-badge">Power</div>
@@ -100,11 +927,16 @@
         <div class="card-category">Outdoor & Survival</div>
         <div class="card-title">BLUETTI Pioneer Na</div>
         <div class="card-desc">Uses sodium-ion batteries instead of lithium. Charges in sub-zero temps where every other power station completely fails.</div>
-        <div class="card-price">$789.00</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Sodium-ion breakthrough</div><a href="https://ussolarsupplier.com/products/bluetti-pioneer-na-sodium-portable-power-station-1-500w-900wh?variant=51007730188586&msclkid=6e2424a8703c1327c62f4d4492daff27&utm_source=bing&utm_medium=cpc&utm_campaign=March+2025+Smart+Shopping&utm_term=2328834348152251&utm_content=Asset+Group+April+2026" target="_blank" rel="noopener" class="btn-see">View ↗</a></div>
+        <div class="card-price">$789</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Sodium-ion</div>
+          <a href="https://ussolarsupplier.com/products/bluetti-pioneer-na-sodium-portable-power-station-1-500w-900wh" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="display">
+      <div class="card-num">03</div>
       <div class="card-img">
         <img src="https://www.bing.com/th?id=OPHS.KzPKnlWUvzSMIg474C474&o=5&pid=21.1&w=164&h=191&qlt=100&dpr=1.3" alt="Xgimi MoGo 4 Projector" />
         <div class="img-badge">Display</div>
@@ -113,24 +945,34 @@
         <div class="card-category">Home Cinema</div>
         <div class="card-title">Xgimi MoGo 4 Projector</div>
         <div class="card-desc">Projects up to 200 inches, doubles as a Bluetooth speaker, and casts ambient effects like sunsets or water ripples onto any wall.</div>
-        <div class="card-price">$519.00</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Ambient art mode</div><a href="https://www.amazon.com/XGIMI-Portable-Projector-PowerBase-Adjustable/dp/B0F4WW648G/" target="_blank" rel="noopener" class="btn-see">View ↗</a></div>
+        <div class="card-price">$519</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Ambient art mode</div>
+          <a href="https://www.amazon.com/XGIMI-Portable-Projector-PowerBase-Adjustable/dp/B0F4WW648G/" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="wearable">
+      <div class="card-num">04</div>
       <div class="card-img">
-        <img src="https://th.bing.com/th/id/OIP.sZwMpE2LU4vBAQwjvVFFBAHaNg?w=115&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="RingPay Smart Ring" />
+        <img src="https://th.bing.com/th/id/OIP.sZwMpE2LU4vBAQwjvVFFBAHaNg?w=115&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="RingConn Gen 2" />
         <div class="img-badge">Wearable</div>
       </div>
       <div class="card-body">
         <div class="card-category">Fintech Wearable</div>
         <div class="card-title">RingConn Gen 2</div>
         <div class="card-desc">A ring with built-in NFC for contactless payments worldwide. No charging — ever. Works at any Visa payWave terminal globally.</div>
-        <div class="card-price">$299.00</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Never needs charging</div><a href="https://ringconn.com/products/ringconn-gen-2?variant=48162846769460" target="_blank" rel="noopener" class="btn-see">View ↗</a></div>
+        <div class="card-price">$299</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Never charges</div>
+          <a href="https://ringconn.com/products/ringconn-gen-2" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="ar">
+      <div class="card-num">05</div>
       <div class="card-img">
         <img src="https://th.bing.com/th/id/OIP.DGhoYEt8I8YR2fdFWb6xeAHaFj?w=243&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="Oakley Aether AR Goggles" />
         <div class="img-badge">AR</div>
@@ -139,10 +981,15 @@
         <div class="card-category">Augmented Reality</div>
         <div class="card-title">Oakley Aether AR Goggles</div>
         <div class="card-desc">Ski-goggle form factor with full AR display, Gemini AI integration, LiDAR sensors, and complete environmental eye protection.</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Full AR immersion</div><a href="#" class="btn-see">View ↗</a></div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Full AR immersion</div>
+          <a href="#" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="computing">
+      <div class="card-num">06</div>
       <div class="card-img">
         <img src="https://images.openai.com/static-rsc-1/Ewh_nUXz5aHvnX9uS8MNwQksaFtLMEbzJIP-2V-_9CAJzgQIpQPiIzX-dnS7nmeAfbwo9v4AMknnDC4Yaq4yNC8wdUpPYSHRrlq3q8UGm5YVJvyHXZDCNki_bmN4NoEIdwgjnWdh_PW_hXzl_TLsBED1Hi3W8h7hBetRDWlEwYsGMmVxUSXZXG0IzxYdMAwVxlQ4Oy9FTy3GbY-wA5lHfrPrvIIBaIxap5sXM-0oU48" alt="Concept Plumage Phone Case" />
         <div class="img-badge">Mobile</div>
@@ -150,11 +997,16 @@
       <div class="card-body">
         <div class="card-category">Productivity</div>
         <div class="card-title">Concept Plumage Phone Case</div>
-        <div class="card-desc">Flips open to reveal a physical keyboard without making your phone any bigger. Tactile typing — no extra bulk.</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Reinvents typing</div><a href="#" class="btn-see">View ↗</a></div>
+        <div class="card-desc">Flips open to reveal a physical keyboard without making your phone any bigger. Tactile typing — zero extra bulk.</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Reinvents typing</div>
+          <a href="#" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="display">
+      <div class="card-num">07</div>
       <div class="card-img">
         <img src="https://th.bing.com/th/id/OIP.ntj5b9roHiQiX0PuMEXVEAHaFj?w=189&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3" alt="InkPoster E-Ink Art Frame" />
         <div class="img-badge">Display</div>
@@ -163,11 +1015,16 @@
         <div class="card-category">Home Decor</div>
         <div class="card-title">InkPoster E-Ink Art Frame</div>
         <div class="card-desc">A high-quality e-ink frame that quietly rotates fresh artwork throughout the day. No glare, no flicker — just beautiful changing walls.</div>
-        <div class="card-price">$167.00</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Zero-glare display</div><a href="https://www.kickstarter.com/projects/arpobot/bloomin8-canvas-the-ai-powered-full-color-e-ink-art-frame?ref=32le5g" target="_blank" rel="noopener" class="btn-see">View ↗</a></div>
+        <div class="card-price">$167</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Zero-glare</div>
+          <a href="https://www.kickstarter.com/projects/arpobot/bloomin8-canvas-the-ai-powered-full-color-e-ink-art-frame" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="computing">
+      <div class="card-num">08</div>
       <div class="card-img">
         <img src="https://th.bing.com/th/id/OIP.QEGuZy6r98Pi2mn2GmN7AwHaEK?w=200&h=200&c=10&o=6&dpr=1.3&pid=genserp&rm=2" alt="Framework Desktop PC" />
         <div class="img-badge">Computing</div>
@@ -176,10 +1033,15 @@
         <div class="card-category">PC Hardware</div>
         <div class="card-title">Framework Desktop</div>
         <div class="card-desc">Fully modular mini PC with swappable USB-C I/O ports and interchangeable decorative front tiles. The most customizable desktop ever made.</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Truly modular</div><a href="#" class="btn-see">View ↗</a></div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Truly modular</div>
+          <a href="#" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="health">
+      <div class="card-num">09</div>
       <div class="card-img">
         <img src="https://www.ces.tech/media/1rontczi/acheless.jpg?width=1250&height=833&format=webp&quality=80" alt="Acheless TMJ Wearable" />
         <div class="img-badge">Health</div>
@@ -188,25 +1050,325 @@
         <div class="card-category">Wellness Tech</div>
         <div class="card-title">Acheless TMJ Wearable</div>
         <div class="card-desc">Award-winning wearable that targets the temporomandibular joint to relieve TMD jaw pain — affects 10M+ Americans with no good solutions.</div>
-        <div class="card-price" style="color:#999;">Price TBA</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Award-winning</div><a href="https://www.ces.tech/ces-innovation-awards/2025/acheless/" target="_blank" rel="noopener" class="btn-see">View ↗</a></div>
+        <div class="card-price" style="color: var(--muted);">Price TBA</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Award-winning</div>
+          <a href="https://www.ces.tech/ces-innovation-awards/2025/acheless/" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
-    <div class="card">
+
+    <div class="card" data-cat="ar">
+      <div class="card-num">10</div>
       <div class="card-img">
         <img src="https://www.bing.com/th?id=OPHS.UjElp9NKEghoag474C474&o=5&pid=21.1&w=152&h=152&qlt=100&dpr=1.3&bw=6&bc=FFFFFF" alt="Meta Ray-Ban Display Glasses" />
         <div class="img-badge">AI Wearable</div>
       </div>
       <div class="card-body">
         <div class="card-category">Smart Glasses</div>
-        <div class="card-title">Ray-Ban Meta (Gen 2)</div>
+        <div class="card-title">Ray-Ban Meta Gen 2</div>
         <div class="card-desc">The first smart glasses that actually work as daily eyewear — AI assistant, camera, audio, and a heads-up display in classic Ray-Ban frames.</div>
-        <div class="card-price">$379.00</div>
-        <div class="card-footer"><div class="wow-tag"><span class="wow-dot"></span> Face computing arrived</div><a href="https://www.amazon.com/Ray-Ban-Wayfarer-Matte-Black-Smart-Glasses/dp/B0FLYDJHB4/" target="_blank" rel="noopener" class="btn-see">View ↗</a></div>
+        <div class="card-price">$379</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Face computing</div>
+          <a href="https://www.amazon.com/Ray-Ban-Wayfarer-Matte-Black-Smart-Glasses/dp/B0FLYDJHB4/" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
       </div>
     </div>
+
+    <div class="card" data-cat="audio">
+      <div class="card-num">11</div>
+      <div class="card-img">
+        <img src="https://www.gearpatrol.com/wp-content/uploads/sites/2/2026/03/astell-kern-PD20-lead.webp?w=1200&h=675&crop=1" alt="Astell&Kern PD20" />
+        <div class="img-badge">Audio</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Hi-Fi / Audiophile</div>
+        <div class="card-title">Astell&Kern PD20</div>
+        <div class="card-desc">Premium digital audio player with a built-in hearing test that creates a personalized EQ profile for each ear — tailored high-resolution sound.</div>
+        <div class="card-price">$1,200–$1,970</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Personalized EQ</div>
+          <a href="https://bloomaudio.com/products/astell-kern-pd20?variant=42175819710539&msclkid=d22c7525de2e16805af01cc8e46bf9e2&utm_source=bing&utm_medium=cpc&utm_campaign=PerformanceMax-Campaign_081925_110534-14&utm_term=2334812942565532&utm_content=Main+Asset+Group" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="home">
+      <div class="card-num">12</div>
+      <div class="card-img">
+        <img src="https://i.abcnewsfe.com/a/ce8e3e55-2cf8-4688-9671-e04fdc65eb8b/Presentation4_1775653903450_hpMain_16x9.jpg?w=992" alt="Dyson HushJet Mini Cool" />
+        <div class="img-badge">Cooling</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Personal Comfort</div>
+        <div class="card-title">Dyson HushJet Mini Cool</div>
+        <div class="card-desc">Dyson's first handheld personal fan — powerful, whisper-quiet airflow in a compact, premium build engineered like their high-end appliances.</div>
+        <div class="card-price">$150–$250</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Dyson portable</div>
+          <a href="https://www.goodmorningamerica.com/shop/story/dyson-portable-handheld-fan-131792896" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="audio">
+      <div class="card-num">13</div>
+      <div class="card-img">
+        <img src="http://ecouteaudio.com/cdn/shop/files/SA_flat_organic_tub_HomePage_1080x614_388ab08f-a5aa-472f-985c-44270c6d1755.jpg?v=1758589738&width=2048" alt="Écoute TH1 Vacuum Tube Headphones" />
+        <div class="img-badge">Audio</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Audiophile</div>
+        <div class="card-title">Écoute TH1 Headphones</div>
+        <div class="card-desc">Over-ear wireless headphones with a real built-in vacuum tube preamp for warm, analog-style audiophile sound — in a modern wireless package.</div>
+        <div class="card-price">$400–$899.00</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Vacuum tube wireless</div>
+          <a href="https://ecouteaudio.com/products/th1-vacuum-tube-audio-headphones-satin-aluminum" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="ar">
+      <div class="card-num">14</div>
+      <div class="card-img">
+        <img src="http://www.eye-oo.com/cdn/shop/files/c046dd0f6d8b34984595254f2d5b8c24.jpg?v=1771625891" alt="Even Realities G2 Smart Glasses" />
+        <div class="img-badge">Smart Glasses</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Augmented Reality</div>
+        <div class="card-title">Even Realities G2</div>
+        <div class="card-desc">Discreet optical smart glasses with heads-up display features, paired seamlessly with a companion smart ring — minimalist design without obvious tech bulk.</div>
+        <div class="card-price">$300–$500</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Ring + glasses combo</div>
+          <a href="https://www.eye-oo.com/products/even-realities-g2-a-grey" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="display">
+      <div class="card-num">15</div>
+      <div class="card-img">
+        <img src="https://www.cepro.com/wp-content/uploads/2026/01/LG-OLED-evo-W6_2-scaled.jpg" alt="LG OLED evo W6 Wallpaper TV" />
+        <div class="img-badge">Display</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Home Cinema</div>
+        <div class="card-title">LG OLED evo W6</div>
+        <div class="card-desc">Ultra-thin "wallpaper" OLED TV that mounts flush to the wall with wireless transmission — stunning picture quality in a nearly invisible design.</div>
+        <div class="card-price">From $5,500+</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> True wireless OLED</div>
+          <a href="https://www.cepro.com/news/lg-unveils-oled-evo-w6-wallpaper-tv-with-true-wireless-design-at-ces-2026/624433/" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="home">
+      <div class="card-num">16</div>
+      <div class="card-img">
+        <img src="https://static.dezeen.com/uploads/2026/01/hero-c-200-seattle-ultrasonics-knife_dezeen_2364_col_0.jpg" alt="Seattle Ultrasonics C-200 Knife" />
+        <div class="img-badge">Kitchen</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Culinary Tech</div>
+        <div class="card-title">Seattle Ultrasonics C-200</div>
+        <div class="card-desc">A vibrating ultrasonic blade that slices through food with minimal effort and cleaner cuts — traditional knife design meets high-tech assistance.</div>
+        <div class="card-price">$200–$399</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Ultrasonic blade</div>
+          <a href="https://seattleultrasonics.com/products/c-200-ultrasonic-8-chefs-knife" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="display">
+      <div class="card-num">17</div>
+      <div class="card-img">
+        <img src="https://i.kickstarter.com/assets/052/912/774/989efcee53045e3c9882d7d95a09768a_original.jpg?anim=false&fit=cover&gravity=auto&height=576&origin=ugc&q=92&v=1773241010&width=1024&sig=wcrZyp7LuVx%2BSvppqovKjvRw6wFSV%2FJJKDWuZBLBjuY%3D" alt="Looking Glass Musubi" />
+        <div class="img-badge">Holographic</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Display</div>
+        <div class="card-title">Looking Glass Musubi</div>
+        <div class="card-desc">A consumer holographic display that turns 2D photos and videos into 3D light-field experiences — no glasses required, battery or plugged-in.</div>
+        <div class="card-price">$200–$400</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Glasses-free 3D</div>
+          <a href="https://www.kickstarter.com/projects/lookingglass/musubi" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="home">
+      <div class="card-num">18</div>
+      <div class="card-img">
+        <img src="https://lifehacker.com/imagery/articles/01JGMQ21EQME1E284XVF9RJGRF/hero-image.fill.size_1248x702.v1735924141.jpg" alt="Roborock Saros Z70" />
+        <div class="img-badge">Robotics</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Home Robotics</div>
+        <div class="card-title">Roborock Saros Z70</div>
+        <div class="card-desc">Advanced robot vacuum with a robotic arm for picking up objects, a stair-climbing wheel-leg hybrid design, and powerful cleaning capabilities.</div>
+        <div class="card-price">$800–$1,500+</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Robotic arm built-in</div>
+          <a href="https://lifehacker.com/tech/roborock-saros-z70-vacuum-robot-arm" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="ar">
+      <div class="card-num">19</div>
+      <div class="card-img">
+        <img src="https://i.ytimg.com/vi/22v4N5ItwkU/maxresdefault.jpg" alt="RayNeo X3 Pro AR Glasses" />
+        <div class="img-badge">AR</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Augmented Reality</div>
+        <div class="card-title">RayNeo X3 Pro AR Glasses</div>
+        <div class="card-desc">AI-powered AR glasses with high-brightness displays and improved waveguides — inconspicuous enough for everyday wear with full virtual overlays.</div>
+        <div class="card-price">$1,000–$1,300</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> Everyday AR</div>
+          <a href="https://www.amazon.com/RayNeo-Glasses-HueView-Display-Portable/dp/B0FFSHMQQ4/" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="wearable">
+      <div class="card-num">20</div>
+      <div class="card-img">
+        <img src="https://i.kickstarter.com/assets/052/965/699/99f183b1741a4b766a32fbdf523d8e4f_original.png?anim=false&fit=cover&gravity=auto&height=576&origin=ugc&q=92&v=1773614548&width=1024&sig=skXcFqEKLC1ynF09ikYlc02cIiV1qegrT%2Fa8iC8dACw%3D" alt="Titan Gauntlets" />
+        <div class="img-badge">Wearable</div>
+      </div>
+      <div class="card-body">
+        <div class="card-category">Modular Wearable</div>
+        <div class="card-title">Titan Gauntlets</div>
+        <div class="card-desc">Sci-fi forearm gauntlet with modular attachments — flashlight, camera, tools — plus a built-in AI assistant and fully customizable tech for daily carry.</div>
+        <div class="card-price">$300–$600</div>
+        <div class="card-footer">
+          <div class="wow-tag"><span class="wow-dot"></span> World's first gauntlet</div>
+          <a href="https://www.kickstarter.com/projects/titangauntlets/titan-gauntlets-worlds-1st-modular-wearable-tech-gauntlet" target="_blank" rel="noopener" class="btn-see"><span>View ↗</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="empty-state" id="emptyState">
+    <div class="empty-icon">◈</div>
+    <p>No gadgets in this category yet</p>
   </div>
 </div>
-<footer>Links on this site may be affiliate links. We earn a small commission at no cost to you. ✦ FutureGadgets 2025</footer>
+
+<footer>
+  <div class="footer-logo">Future<span>Gadgets</span></div>
+  <p>Links may be affiliate links. We earn a small commission at no cost to you.<br>✦ FutureGadgets 2025</p>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '20px';
+      cursor.style.height = '20px';
+      ring.style.width = '50px';
+      ring.style.height = '50px';
+      ring.style.borderColor = 'rgba(0,255,136,0.6)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '12px';
+      cursor.style.height = '12px';
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(0,255,136,0.4)';
+    });
+  });
+
+  // Stagger card animation on scroll
+  const cards = document.querySelectorAll('.card');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animation = `fadeIn 0.6s ${(Array.from(cards).indexOf(entry.target) % 3) * 0.08}s both`;
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  cards.forEach(c => { c.style.opacity = '0'; observer.observe(c); });
+  // ── FILTER ──
+  const catLabels = {
+    all: 'All 20 Gadgets',
+    ar: 'AR & Smart Glasses',
+    audio: 'Audio',
+    display: 'Display & TV',
+    wearable: 'Wearables',
+    home: 'Home Tech',
+    outdoor: 'Outdoor & Power',
+    computing: 'Computing',
+    health: 'Health'
+  };
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const resultCount = document.getElementById('resultCount');
+  const sectionTitle = document.getElementById('sectionTitle');
+  const emptyState = document.getElementById('emptyState');
+  const gridEl = document.getElementById('gadgetGrid');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let visible = 0;
+      document.querySelectorAll('.card').forEach(card => {
+        const match = cat === 'all' || card.dataset.cat === cat;
+        card.classList.toggle('hidden', !match);
+        if (match) visible++;
+      });
+
+      resultCount.textContent = visible === 1 ? '1 gadget' : `${visible} gadgets`;
+      sectionTitle.textContent = catLabels[cat] || cat;
+      emptyState.classList.toggle('visible', visible === 0);
+      gridEl.style.display = visible === 0 ? 'none' : 'grid';
+
+      // Re-hook cursor for any newly visible buttons
+      document.querySelectorAll('a, button').forEach(el => {
+        el.onmouseenter = () => {
+          cursor.style.width = '20px'; cursor.style.height = '20px';
+          ring.style.width = '50px'; ring.style.height = '50px';
+          ring.style.borderColor = 'rgba(0,255,136,0.6)';
+        };
+        el.onmouseleave = () => {
+          cursor.style.width = '12px'; cursor.style.height = '12px';
+          ring.style.width = '36px'; ring.style.height = '36px';
+          ring.style.borderColor = 'rgba(0,255,136,0.4)';
+        };
+      });
+    });
+  });
+</script>
 </body>
 </html>
